@@ -1,0 +1,6 @@
+# Historical Plugin for GLPI Changelog
+
+## [1.0.0]
+
+### Added
+- Initial release
