@@ -32,6 +32,7 @@ function plugin_init_historical() {
    if (Log::canView()) {
       $PLUGIN_HOOKS['menu_toadd']['historical'] = ['admin' => 'PluginHistoricalLog'];
    }
+   $CFG_GLPI['glpiitemtypetables'][Log::getTable()] = PluginHistoricalLog::class;
 }
 
 function plugin_version_historical() {
