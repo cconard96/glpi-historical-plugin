@@ -26,6 +26,8 @@ include '../../../inc/includes.php';
 Html::header(Log::getTypeName(1), $_SERVER['PHP_SELF'], 'admin', 'PluginHistoricalLog');
 
 if (Session::haveRight(Log::$rightname, READ)) {
+   $_GET['sort'] = 8;
+   $_GET['order'] = 'DESC';
    Search::show('PluginHistoricalLog');
 } else {
    Html::displayRightError();
