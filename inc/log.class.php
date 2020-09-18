@@ -88,7 +88,7 @@ class PluginHistoricalLog extends Log {
          'table'              => $log_table,
          'field'              => 'items_id',
          'name'               => __('Item ID'),
-         'datatype'           => 'number',
+         'datatype'           => 'specific',
          'massiveaction'      => false,
       ];
 
@@ -182,6 +182,15 @@ class PluginHistoricalLog extends Log {
                }
             }
             return __('Data not available');
+         case 'items_id':
+            if ($options['raw_data']['raw']['ITEM_PluginHistoricalLog_3']) {
+               /** @var CommonDBTM $itemtype */
+               $itemtype = $options['raw_data']['raw']['ITEM_PluginHistoricalLog_3'];
+               if (class_exists($itemtype)) {
+                  return Html::link($values[$field], $itemtype::getFormUrlWithID($values[$field]));
+               }
+            }
+            return $values[$field];
       }
    }
 }
