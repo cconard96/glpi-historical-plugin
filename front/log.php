@@ -23,6 +23,11 @@
 
 include '../../../inc/includes.php';
 
+$plugin = new Plugin();
+if (!$plugin->isActivated('historical')) {
+   Html::displayNotFoundError();
+}
+
 Html::header(Log::getTypeName(1), $_SERVER['PHP_SELF'], 'admin', 'PluginHistoricalLog');
 
 if (Session::haveRight(Log::$rightname, READ)) {
