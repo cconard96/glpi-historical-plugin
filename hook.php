@@ -22,10 +22,10 @@
 
 function plugin_historical_install()
 {
-   return true;
+    return true;
 }
 
 function plugin_historical_uninstall()
 {
-   return true;
+    return true;
 }

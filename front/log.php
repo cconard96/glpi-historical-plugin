@@ -24,16 +24,16 @@ include '../../../inc/includes.php';
 
 $plugin = new Plugin();
 if (!$plugin->isActivated('historical')) {
-   Html::displayNotFoundError();
+    Html::displayNotFoundError();
 }
 
 Html::header(Log::getTypeName(1), $_SERVER['PHP_SELF'], 'admin', 'PluginHistoricalLog');
 
 if (Session::haveRight(Log::$rightname, READ)) {
-   $_GET['sort'] = 8;
-   $_GET['order'] = 'DESC';
-   Search::show('PluginHistoricalLog');
+    $_GET['sort'] = 8;
+    $_GET['order'] = 'DESC';
+    Search::show('PluginHistoricalLog');
 } else {
-   Html::displayRightError();
+    Html::displayRightError();
 }
 Html::footer();

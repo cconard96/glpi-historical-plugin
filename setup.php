@@ -25,52 +25,52 @@ define('PLUGIN_HISTORICAL_MIN_GLPI', '9.5.0');
 define('PLUGIN_HISTORICAL_MAX_GLPI', '9.6.0');
 
 function plugin_init_historical() {
-   global $PLUGIN_HOOKS, $CFG_GLPI;
+    global $PLUGIN_HOOKS, $CFG_GLPI;
 
-   $PLUGIN_HOOKS['csrf_compliant']['historical'] = true;
-   if (Log::canView()) {
-      $PLUGIN_HOOKS['menu_toadd']['historical'] = ['admin' => 'PluginHistoricalLog'];
-   }
-   $CFG_GLPI['glpiitemtypetables'][Log::getTable()] = PluginHistoricalLog::class;
+    $PLUGIN_HOOKS['csrf_compliant']['historical'] = true;
+    if (Log::canView()) {
+        $PLUGIN_HOOKS['menu_toadd']['historical'] = ['admin' => 'PluginHistoricalLog'];
+    }
+    $CFG_GLPI['glpiitemtypetables'][Log::getTable()] = PluginHistoricalLog::class;
 }
 
 function plugin_version_historical() {
-   
-   return [
-      'name' => __('Historical Plugin for GLPI', 'historical'),
-      'version' => PLUGIN_HISTORICAL_VERSION,
-      'author'  => 'Curtis Conard',
-      'license' => 'GPLv2',
-      'homepage'=>'https://github.com/cconard96/historical',
-      'requirements'   => [
-         'glpi'   => [
-            'min' => PLUGIN_HISTORICAL_MIN_GLPI,
-            'max' => PLUGIN_HISTORICAL_MAX_GLPI
-         ]
-      ]
-   ];
+
+    return [
+        'name' => __('Historical Plugin for GLPI', 'historical'),
+        'version' => PLUGIN_HISTORICAL_VERSION,
+        'author'  => 'Curtis Conard',
+        'license' => 'GPLv2',
+        'homepage'=>'https://github.com/cconard96/historical',
+        'requirements'   => [
+            'glpi'   => [
+                'min' => PLUGIN_HISTORICAL_MIN_GLPI,
+                'max' => PLUGIN_HISTORICAL_MAX_GLPI
+            ]
+        ]
+    ];
 }
 
 function plugin_historical_check_prerequisites() {
-   if (!method_exists('Plugin', 'checkGlpiVersion')) {
-      $version = preg_replace('/^((\d+\.?)+).*$/', '$1', GLPI_VERSION);
-      $matchMinGlpiReq = version_compare($version, PLUGIN_HISTORICAL_MIN_GLPI, '>=');
-      $matchMaxGlpiReq = version_compare($version, PLUGIN_HISTORICAL_MAX_GLPI, '<');
-      if (!$matchMinGlpiReq || !$matchMaxGlpiReq) {
-         echo vsprintf(
-            'This plugin requires GLPI >= %1$s and < %2$s.',
-            [
-               PLUGIN_HISTORICAL_MIN_GLPI,
-               PLUGIN_HISTORICAL_MAX_GLPI,
-            ]
-         );
-         return false;
-      }
-   }
-   return true;
+    if (!method_exists('Plugin', 'checkGlpiVersion')) {
+        $version = preg_replace('/^((\d+\.?)+).*$/', '$1', GLPI_VERSION);
+        $matchMinGlpiReq = version_compare($version, PLUGIN_HISTORICAL_MIN_GLPI, '>=');
+        $matchMaxGlpiReq = version_compare($version, PLUGIN_HISTORICAL_MAX_GLPI, '<');
+        if (!$matchMinGlpiReq || !$matchMaxGlpiReq) {
+            echo vsprintf(
+                'This plugin requires GLPI >= %1$s and < %2$s.',
+                [
+                    PLUGIN_HISTORICAL_MIN_GLPI,
+                    PLUGIN_HISTORICAL_MAX_GLPI,
+                ]
+            );
+            return false;
+        }
+    }
+    return true;
 }
 
 function plugin_historical_check_config()
 {
-   return true;
+    return true;
 }
